@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>{{ item.title }} | Recipe Details</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="bg-gradient-to-br from-yellow-50 to-orange-100 min-h-screen">
+  <div class="max-w-4xl mx-auto p-4 md:p-8">
+    <div class="flex flex-wrap gap-4 items-center mb-6">
+      <!-- Update Button -->
+      <form method="post" enctype="multipart/form-data" >
+        {% csrf_token %}
+        {{ form.as_p }}
+          <button type="submit"
+            class="inline-flex items-center gap-2 bg-blue-600 text-white px-5 py-2 rounded-lg shadow-md hover:bg-blue-700 transition">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+              stroke="currentColor" class="w-5 h-5">
+              <path stroke-linecap="round" stroke-linejoin="round"
+                d="M16.862 4.487a2.25 2.25 0 013.181 3.181L7.5 20.25H3v-4.5L16.862 4.487z" />
+            </svg>
+            <a href="/dashboard/update_recipe/{{item.id}}/">Update</a>
+          </button>
+      </form>
+
+      <!-- Delete Button -->
+      <form method="post" action="{% url 'delete_recipe' item.id %}" onsubmit="return confirm('Are you sure you want to delete this recipe?');">
+        {% csrf_token %}
+        <button type="submit"
+          class="inline-flex items-center gap-2 bg-red-600 text-white px-5 py-2 rounded-lg shadow-md hover:bg-red-700 transition">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+            stroke="currentColor" class="w-5 h-5">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+          </svg>
+          Delete
+        </button>
+      </form>
+    </div>
+    <a href="/dashboard/my_recipes" class="text-blue-600 hover:underline text-sm md:text-base">&larr; Back to
+      Recipes</a>
+
+    <div class="bg-white rounded-2xl shadow-lg overflow-hidden mt-4">
+      <img src="{{ item.image.url }}" alt="{{ item.title }}" class="w-full h-64 md:h-96 object-cover object-center">
+
+      <div class="p-6 md:p-10 space-y-4">
+        <h1 class="text-3xl md:text-4xl font-bold text-gray-800">{{ item.title }}</h1>
+        <p class="text-gray-500 text-sm">By: <span class="font-semibold">{{ item.auth.username }}</span></p>
+
+        <p class="text-lg text-gray-700"><strong>Description:</strong><br>{{ item.short_desc }}</p>
+
+        <hr class="border-gray-300 my-4">
+
+        <div>
+          <h2 class="text-2xl font-semibold text-gray-800 mb-2">Procedure</h2>
+          <p class="text-gray-800 leading-relaxed whitespace-pre-line">{{ item.procedure }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+
+</html>

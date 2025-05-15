@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Update Recipe</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="bg-orange-50 min-h-screen py-10">
+
+    <div class="max-w-3xl mx-auto px-6">
+        <h1 class="text-4xl font-bold text-center text-orange-700 mb-8">Update Recipe</h1>
+        <a href="/dashboard/" class="text-blue-600 hover:underline text-sm md:text-base">&larr; Back to Home</a>
+        <form method="POST" enctype="multipart/form-data" class="bg-white p-8 rounded-xl shadow-md space-y-6">
+            {% csrf_token %}
+
+            <!-- Title -->
+            <div>
+                <label class="block text-sm font-semibold text-gray-700 mb-1">Title</label>
+                <input type="text" name="title" maxlength="200" value="{{ item.title }}"
+                    class="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-orange-400">
+            </div>
+
+            <!-- Short Description -->
+            <div>
+                <label class="block text-sm font-semibold text-gray-700 mb-1">Short Description</label>
+                <textarea name="short_desc" maxlength="500" rows="2"
+                    class="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-orange-400">{{ item.short_desc }}</textarea>
+            </div>
+
+            <!-- Procedure -->
+            <div>
+                <label class="block text-sm font-semibold text-gray-700 mb-1">Procedure</label>
+                <textarea name="procedure" rows="6"
+                    class="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-orange-400">{{ item.procedure }}</textarea>
+            </div>
+
+            <!-- Image Upload -->
+            <div>
+                <label class="block text-sm font-semibold text-gray-700 mb-1">Image</label>
+                <input type="file" name="image" accept="image/*"
+                    class="w-full border border-gray-300 rounded-lg px-4 py-2">
+                {% if item.image %}
+                <p class="mt-2 text-sm text-gray-600">Current Image: <a href="{{ item.image.url }}"
+                        class="text-orange-500 underline" target="_blank">View</a></p>
+                {% endif %}
+            </div>
+
+            <!-- Submit Button -->
+            <div class="text-center">
+                <button type="submit"
+                    class="bg-orange-500 text-white font-semibold px-6 py-2 rounded-full hover:bg-orange-600 transition duration-200">
+                    Submit Recipe
+                </button>
+            </div>
+        </form>
+    </div>
+</body>
+
+</html>
