@@ -25,3 +25,13 @@ class FoodItem(models.Model):
 
     def __str__(self):
         return self.title
+    
+class Wishlist(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    recipe = models.ForeignKey(FoodItem, on_delete=models.CASCADE)  # use your Recipe model
+
+    class Meta:
+        unique_together = ('user', 'recipe')  # Prevent duplicates
+
+    def __str__(self):
+        return f"{self.user.username} - {self.recipe.title}"

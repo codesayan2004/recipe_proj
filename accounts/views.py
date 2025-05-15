@@ -4,7 +4,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
 from django.contrib import messages
 from django.template import loader
-from .models import AdditionalUserInfo, FoodItem
+from .models import AdditionalUserInfo, FoodItem, Wishlist
 # Create your views here.
 
 def home(request):
@@ -98,9 +98,13 @@ def guest_recipes(request):
 
 def particular_recipe(request, id):
     itm = FoodItem.objects.get(id=id)
+    in_wishlist = False
+    if request.user.is_authenticated:
+        in_wishlist = Wishlist.objects.filter(user=request.user, recipe=itm).exists()
     template = loader.get_template("part_recipe.html")
     context = {
-        'item' : itm
+        'item' : itm,
+        'in_wishlist': in_wishlist
     }
     return HttpResponse(template.render(context,request))
 
@@ -194,3 +198,37 @@ def update_recipe(request, id):
 
 def guest_particular_recipe(request, id):
     return HttpResponse("You Need to Login First to View this Recipe") 
+
+def toggle_wishlist(request, id):
+    if request.user.is_authenticated:
+        food_item = FoodItem.objects.get(id=id)
+        wishlist_item, created = Wishlist.objects.get_or_create(user=request.user, recipe=food_item)
+
+        user_info = AdditionalUserInfo.objects.get(user=request.user)
+
+        if created:
+            messages.success(request, "Recipe added to wishlist")
+            user_info.wishlist_cnt += 1
+            user_info.save()
+        else:
+            wishlist_item.delete()
+            messages.success(request, "Recipe removed from wishlist")
+            user_info.wishlist_cnt -= 1
+            user_info.save()
+
+        return redirect(f'/dashboard/recipe/{id}')
+    else:
+        messages.info(request, "You need to login first")
+        return redirect('/login')
+    
+def wishlist(request):
+    if request.user.is_authenticated:
+        wishlist_items = Wishlist.objects.filter(user=request.user)
+        print(wishlist_items)
+        food_items = [item.recipe for item in wishlist_items]
+        template = loader.get_template('wishlist.html')
+        context = {'food_items': food_items}
+        return HttpResponse(template.render(context, request))
+    else:
+        messages.info(request, "You need to login first")
+        return redirect('/login')

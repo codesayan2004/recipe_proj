@@ -17,4 +17,6 @@ urlpatterns = [
     path('dashboard/my_recipes/<int:id>/', particular_my_recipe, name='particular_my_recipe'),
     path('dashboard/update_recipe/<int:id>/', update_recipe, name='update_recipe'),
     path('dashboard/delete_recipe/<int:id>/', delete_recipe, name='delete_recipe'),
+    path('wishlist/toggle/<int:id>/', toggle_wishlist, name='toggle_wishlist'),
+    path('dashboard/wishlist/', wishlist, name='wishlist'),
 ]
