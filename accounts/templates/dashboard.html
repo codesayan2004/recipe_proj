@@ -7,55 +7,73 @@
   <title>TastyWorld Dashboard</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+    }
+  </style>
 </head>
 
-<body class="bg-gray-100 min-h-screen font-sans">
+<body class="bg-gradient-to-br from-orange-50 to-pink-50 min-h-screen">
+
   <!-- Header -->
-  <header class="bg-white shadow p-4 flex justify-between items-center">
-    <h1 class="text-2xl font-bold text-orange-500">TastyWorld Dashboard</h1>
-    <div class="flex items-center gap-4">
-      <a href="/dashboard/profile" class="text-gray-600 hover:text-orange-500">
-        <i class="fas fa-user-circle text-3xl"></i>
+  <header class="bg-white shadow-lg p-5 flex justify-between items-center sticky top-0 z-50">
+    <h1 class="text-3xl font-extrabold text-orange-500 tracking-wide drop-shadow-md">🍽 TastyWorld</h1>
+    <div class="flex items-center gap-6">
+      <a href="/dashboard/profile" class="text-gray-700 hover:text-orange-500 transition">
+        <i class="fas fa-user-circle text-4xl"></i>
       </a>
-      <a href="/logout" class="text-red-500 hover:text-red-700 font-semibold">
-        <i class="fas fa-sign-out-alt"></i> Logout
+      <a href="/logout" class="flex items-center text-red-500 hover:text-red-700 font-semibold transition">
+        <i class="fas fa-sign-out-alt mr-2"></i> Logout
       </a>
     </div>
   </header>
 
   <!-- Main Content -->
-  <main class="p-6">
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+  <main class="p-8">
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+
       <!-- Available Recipes -->
-      <a href="recipe" class="bg-white p-6 rounded-lg shadow hover:shadow-lg transition text-center group">
-        <i class="fas fa-book-open text-4xl text-orange-400 group-hover:text-orange-600"></i>
-        <h2 class="mt-4 text-xl font-semibold text-gray-700 group-hover:text-orange-500">Available Recipes</h2>
+      <a href="/recipe" class="group bg-white p-8 rounded-2xl shadow-xl hover:shadow-2xl transform hover:-translate-y-2 transition-all duration-300 text-center">
+        <div class="bg-orange-100 p-6 rounded-full mx-auto mb-6 w-24 h-24 flex items-center justify-center group-hover:bg-orange-200">
+          <i class="fas fa-book-open text-5xl text-orange-500 group-hover:text-orange-600"></i>
+        </div>
+        <h2 class="text-xl font-semibold text-gray-700 group-hover:text-orange-500">Available Recipes</h2>
       </a>
 
       <!-- Add New Recipe -->
-      <a href="add_recipe" class="bg-white p-6 rounded-lg shadow hover:shadow-lg transition text-center group">
-        <i class="fas fa-plus-circle text-4xl text-green-400 group-hover:text-green-600"></i>
-        <h2 class="mt-4 text-xl font-semibold text-gray-700 group-hover:text-green-500">Add New Recipe</h2>
+      <a href="add_recipe" class="group bg-white p-8 rounded-2xl shadow-xl hover:shadow-2xl transform hover:-translate-y-2 transition-all duration-300 text-center">
+        <div class="bg-green-100 p-6 rounded-full mx-auto mb-6 w-24 h-24 flex items-center justify-center group-hover:bg-green-200">
+          <i class="fas fa-plus-circle text-5xl text-green-500 group-hover:text-green-600"></i>
+        </div>
+        <h2 class="text-xl font-semibold text-gray-700 group-hover:text-green-500">Add New Recipe</h2>
       </a>
 
       <!-- My Recipes -->
-      <a href="my_recipes" class="bg-white p-6 rounded-lg shadow hover:shadow-lg transition text-center group">
-        <i class="fas fa-folder-open text-4xl text-blue-400 group-hover:text-blue-600"></i>
-        <h2 class="mt-4 text-xl font-semibold text-gray-700 group-hover:text-blue-500">My Recipes</h2>
+      <a href="my_recipes" class="group bg-white p-8 rounded-2xl shadow-xl hover:shadow-2xl transform hover:-translate-y-2 transition-all duration-300 text-center">
+        <div class="bg-blue-100 p-6 rounded-full mx-auto mb-6 w-24 h-24 flex items-center justify-center group-hover:bg-blue-200">
+          <i class="fas fa-folder-open text-5xl text-blue-500 group-hover:text-blue-600"></i>
+        </div>
+        <h2 class="text-xl font-semibold text-gray-700 group-hover:text-blue-500">My Recipes</h2>
       </a>
 
       <!-- Wishlist -->
-      <a href="wishlist" class="bg-white p-6 rounded-lg shadow hover:shadow-lg transition text-center group">
-        <i class="fas fa-heart text-4xl text-red-400 group-hover:text-red-600"></i>
-        <h2 class="mt-4 text-xl font-semibold text-gray-700 group-hover:text-red-500">Wishlist</h2>
+      <a href="wishlist" class="group bg-white p-8 rounded-2xl shadow-xl hover:shadow-2xl transform hover:-translate-y-2 transition-all duration-300 text-center">
+        <div class="bg-red-100 p-6 rounded-full mx-auto mb-6 w-24 h-24 flex items-center justify-center group-hover:bg-red-200">
+          <i class="fas fa-heart text-5xl text-red-500 group-hover:text-red-600"></i>
+        </div>
+        <h2 class="text-xl font-semibold text-gray-700 group-hover:text-red-500">Wishlist</h2>
       </a>
+
     </div>
   </main>
 
   <!-- Footer -->
-  <footer class="text-center text-gray-500 py-4">
-    &copy; 2025 TastyWorld. Cook, Share & Enjoy!
+  <footer class="text-center text-gray-500 py-6 text-sm">
+    &copy; 2025 TastyWorld. Cook, Share & Enjoy! 🍳
   </footer>
+
 </body>
 
 </html>

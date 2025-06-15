@@ -81,14 +81,10 @@ def profile(request):
         return redirect('/login')
     
 def recipes(request):
-    if request.user.is_authenticated:
         food_items = FoodItem.objects.all()
         template = loader.get_template('recipes.html')
         context = {'food_items': food_items}
         return HttpResponse(template.render(context, request))
-    else:
-        messages.info(request, "You need to login first")
-        return redirect('/login')
 
 def guest_recipes(request):
     food_items = FoodItem.objects.all()
@@ -128,7 +124,7 @@ def add_recipe(request):
             user_info.recipe_cnt += 1
             user_info.save()
             messages.success(request, "Recipe added successfully")
-            return redirect('/dashboard/recipe/')
+            return redirect('/recipe/')
         template = loader.get_template('add_recipe.html')
         context = {}
         return HttpResponse(template.render(context, request))
@@ -216,7 +212,7 @@ def toggle_wishlist(request, id):
             user_info.wishlist_cnt -= 1
             user_info.save()
 
-        return redirect(f'/dashboard/recipe/{id}')
+        return redirect(f'/recipe/{id}')
     else:
         messages.info(request, "You need to login first")
         return redirect('/login')

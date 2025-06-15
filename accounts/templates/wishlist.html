@@ -21,7 +21,7 @@
     </div>
     <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
       {% for item in food_items %}
-      <a href="/dashboard/recipe/{{item.id}}">
+      <a href="/recipe/{{item.id}}">
         <div class="bg-white rounded-xl shadow hover:shadow-xl transition duration-300">
           <img src="{{ item.image.url }}" alt="{{ item.title }}" class="w-full h-48 object-cover rounded-t-xl">
           <div class="p-4">
